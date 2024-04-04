@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Sender Form</title>
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 20px;
+    }
+
+    h1 {
+        color: #333;
+    }
+
+    form {
+        background: #fff;
+        max-width: 400px;
+        margin: 50px auto;
+        padding: 20px;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+    }
+
+    form label {
+        margin-top: 10px;
+        display: block;
+        color: #666;
+    }
+
+    form input[type=email],
+    form input[type=text],
+    form textarea {
+        width: 100%;
+        padding: 8px;
+        margin-top: 5px;
+        margin-bottom: 20px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-sizing: border-box; 
+    }
+
+    form button {
+        width: 100%;
+        background-color:blue;
+        color: white;
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    form button:hover {
+        background-color: #4cae4c;
+    }
+
+    @media (max-width: 600px) {
+        form {
+            width: 90%;
+            margin: 20px auto;
+        }
+    }
+</style>
+
+<body>
+    <h1>Send an Email</h1>
+    <form id="emailForm">
+        <label for="to">Recipient's Email:</label><br>
+        <input type="email" id="to" name="to" required><br>
+
+        <label for="subject">Subject:</label><br>
+        <input type="text" id="subject" name="subject" required><br>
+
+        <label for="text">Email Text:</label><br>
+        <textarea id="text" name="text" rows="4" required></textarea><br>
+
+        <button type="submit">Send Email</button>
+    </form>
+
+    <script>
+        document.getElementById('emailForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const recipient = document.getElementById('to').value;
+            const subject = document.getElementById('subject').value;
+            const text = document.getElementById('text').value;
+
+            fetch('http://localhost:3000/send', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    to: recipient,
+                    subject: subject,
+                    text: text,
+                }),
+            })
+            .then(response => response.text())
+            .then(data => alert(data))
+            .catch((error) => {
+                console.error('Error:', error);
+                alert('Failed to send email');
+            });
+        });
+    </script>
+</body>
+</html>
