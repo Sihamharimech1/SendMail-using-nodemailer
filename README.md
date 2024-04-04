@@ -21,25 +21,30 @@ Clone the repository to your local machine:
 git clone https://github.com/your-username/email-sender-service.git
 cd email-sender-service
 npm install
+
+## Setup the env file
+
 Create a .env file in the root directory with the following content, replacing the values with your actual email credentials:
 
-# .env file
 GMAIL_USER=yourEmail@gmail.com
 GMAIL_PASS=yourAppPassword
 
 Note: Never commit this file or share your credentials publicly.
 
-Usage
+## Usage
+
 To start the server, run:
 
 npm start
 
 By default, the server will start on port 3000. You can visit http://localhost:3000 in your web browser to send emails using the provided form.
 
-API Endpoints
+## API Endpoints
+The following endpoints are available in this project
 POST /send
-
 Sends an email to the specified recipient.
 Request body should include to, subject, and text fields.
-Contributing
+
+## Contributing
+
 Contributions are welcome. Please open an issue first to discuss what you would like to change or add.
